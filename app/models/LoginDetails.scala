@@ -5,9 +5,9 @@ import play.api.data.Forms._
 
 case class LoginDetails(username: String, password: String)
 
-object LoginDetails {
+object LoginDetails  {
 
-  val userList: List[LoginDetails] = List(LoginDetails("admin", "password"))
+  val userList: List[LoginDetails] = List(Person("gavin", 23, "admin", "password").loginDetails)
 
   val loginForm: Form[LoginDetails] = Form(
     mapping(
@@ -18,7 +18,7 @@ object LoginDetails {
 
   def checkIfUserIsValid(userDetails: LoginDetails): Boolean = userList.contains(userDetails)
 
-  def getUsername(username: String): Option[LoginDetails] = userList.find(person => person.username == username)
+  def getUsername(username: String): Option[LoginDetails] = userList.find(loginDetails => loginDetails.username == username)
 
 
 }

@@ -6,6 +6,7 @@ import play.api.libs.json.OFormat
 
 
 case class Person(name: String, age: Int, username: String, password: String) {
+  val loginDetails: LoginDetails = LoginDetails(username,password)
   override def toString: _root_.java.lang.String = {
     s"Full Name: $name Age: $age Username: $username"
   }
@@ -38,11 +39,12 @@ object Person{
   //
   //  def getUsername(username: String) = userList.filter(user => user.username == username).headOption
 }
-object PersonJsonFormats {
+object JsonFormats {
 
   import play.api.libs.json.Json
 
-  implicit val userFormat: OFormat[Person] = Json.format[Person]
+  implicit val personFormat: OFormat[Person] = Json.format[Person]
+  implicit val loginDetailsFormat: OFormat[LoginDetails] = Json.format[LoginDetails]
 }
 
 case class Search(username: String)

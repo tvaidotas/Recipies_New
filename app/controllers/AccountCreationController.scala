@@ -9,7 +9,7 @@ import scala.concurrent.{ExecutionContext, Future}
 import reactivemongo.play.json._
 import collection._
 import models.{LoginDetails, Person, Search}
-import models.PersonJsonFormats._
+import models.JsonFormats._
 import play.api.libs.json.{JsValue, Json}
 import reactivemongo.api.Cursor
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
@@ -24,6 +24,8 @@ class AccountCreationController @Inject()(
 
   def collection: Future[JSONCollection] = database.map(_.collection[JSONCollection]("persons"))
 
+
+  // TODO:  implement uniqueness on username
   def create: Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
     Person.accountCreation.bindFromRequest.fold({ formWithErrors =>
       Future.successful(BadRequest(views.html.signup(formWithErrors)))
