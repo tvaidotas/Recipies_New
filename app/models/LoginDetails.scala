@@ -2,6 +2,7 @@ package models
 
 import play.api.data.Form
 import play.api.data.Forms._
+import play.api.db
 
 case class LoginDetails(username: String, password: String)
 
@@ -18,7 +19,7 @@ object LoginDetails {
 
   def checkIfUserIsValid(userDetails: LoginDetails): Boolean = userList.contains(userDetails)
 
-  def getUsername(username: String): Option[LoginDetails] = userList.find(user => user.username == username)
+  def getUsername(username: String): Option[LoginDetails] = userList.find(person => person.username == username)
 
 
 }
