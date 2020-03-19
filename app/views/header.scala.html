@@ -1,0 +1,10 @@
+@()(implicit messages: MessagesProvider, session: Session)
+
+<div>
+    @if(session.get("username").nonEmpty) {
+        <a class = "button" href="@routes.LoginController.logout()">@messages.messages("logout")</a>
+    } else {
+        <a class = "button" href="@routes.LoginController.login()">@messages.messages("login")</a>
+        <a class = "button" href="@routes.AccountCreationController.signup()">@messages.messages("signup")</a>
+    }
+</div>
